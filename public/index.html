@@ -3,7 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1, maximum-scale=1, viewport-fit=cover">
+
+    <meta content="no-cache" http-equiv="pragma">
+    <meta content="no-cache" http-equiv="cache-control">
+    <meta content="0" http-equiv="expires">
+
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="fullscreen=yes,useHistoryState=yes,transition=yes" name="App-Config">
+    <meta content="telephone=no,email=no" name="format-detection">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>socket</title>
     <script>
@@ -20,6 +29,29 @@
         win.addEventListener(resizeEvt, recalc, false);
         doc.addEventListener('DOMContentLoaded', recalc, false)
       })(document, window);
+
+      // 虚拟键盘遮挡输入框的解决方案
+      (function (doc) {
+        var docEl = doc.documentElement;
+        docEl.addEventListener('touchstart', function (e) {
+          let target = e.target;
+          if (target.tagName.toLowerCase() === 'input' || target.tagName.toLowerCase() === 'textarea') {
+            // var reg = /^(number|text|password)$/
+            // if (reg.test(target.type)) {
+              setTimeout(function () {
+                if (target.scrollIntoViewIfNeeded) {
+                  //alignCenter
+                  target.scrollIntoViewIfNeeded(true);
+                } else {
+                  //alignWithTop
+                  target.scrollIntoView && target.scrollIntoView(false);
+                }
+              }, 50);
+            // }
+          }
+        }, false)
+      })(document);
+
     </script>
 
   </head>
