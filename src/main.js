@@ -7,7 +7,7 @@ import router from './router';
 import store from './store';
 
 import directives from '@/directives';
-
+import filters from '@/filters';
 import ajax from '@/api/ajax';
 
 import '@/assets/sass/base.scss';
@@ -31,6 +31,11 @@ ajax.install = function (Vue) {
 Vue.use(ajax);
 
 Vue.config.productionTip = false
+
+
+window.EventVue = new Vue();
+
+filters(Vue);
 
 new Vue({
   router,

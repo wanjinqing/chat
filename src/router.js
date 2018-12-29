@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/components/index';
 import login from '@/components/login';
+import rooms from '@/components/rooms';
 
 import Cookies from 'js-cookie';
 
@@ -20,7 +21,12 @@ const router = new Router({
       path: '/login',
       name: 'login',
       component: login
-    }
+    },
+    {
+      path: '/rooms',
+      name: 'rooms',
+      component: rooms
+    },
   ]
 })
 

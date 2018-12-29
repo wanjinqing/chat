@@ -54,7 +54,6 @@ export default {
       // path: '/'
     });
     this.socket.on('connect', () => {
-      console.log('connect', this.socket.id)
       this.socket.on('joinRoom', this.joinRoom);
       this.socket.on('connect_notice', this.connectNotice);
       this.socket.on('receive', this.receive);
@@ -87,10 +86,10 @@ export default {
       console.log('reconnect_failed')
     });
     this.socket.on('ping', () => {
-      console.log('ping')
+      // console.log('ping')
     });
     this.socket.on('pong', () => {
-      console.log('pong')
+      // console.log('pong')
     });
   },
   mounted() {

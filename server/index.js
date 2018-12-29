@@ -28,6 +28,7 @@ socketio.on('connection', (socket) => {
         socket.broadcast.to(roomName).emit('receive', msg);
       }
     }
+    console.log(user)
   })
   // 在该房间里的所有用户
   // console.log(socket.adapter.rooms[roomName].sockets);

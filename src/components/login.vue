@@ -15,11 +15,14 @@ export default {
   mounted() {},
   methods: {
     login() {
+      if (!this.username) {
+        EventVue.$emit('showtoast', '用户名不能为空');
+        return;
+      }
       this.$ajax.post("/login", { username: this.username }).then(res => {
-        console.log(res)
         if (res.code === '000000') {
           Cookies.set("username", res.data);
-          this.$router.push("/");
+          this.$router.push("/rooms");
         }
       });
     }
