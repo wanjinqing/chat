@@ -22,7 +22,7 @@ export default {
       this.$ajax.post("/login", { username: this.username }).then(res => {
         if (res.code === '000000') {
           Cookies.set("username", res.data);
-          this.$router.push("/rooms");
+          this.$router.push({path: '/rooms'});
         }
       });
     }
@@ -49,7 +49,7 @@ input {
 button {
   width: 100%;
   height: 0.68rem;
-  background: linear-gradient(to right bottom, #456, #897);
+  background: #734;
   background-repeat: repeat;
   margin-top: 0.3rem;
   border: none;

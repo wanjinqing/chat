@@ -38,6 +38,7 @@ export default {
 <style lang="scss" scoped>
 .toast{
   position: fixed;
+  z-index: 9999;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

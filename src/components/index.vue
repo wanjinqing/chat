@@ -40,16 +40,16 @@ export default {
   data () {
     return {
       username: Cookies.get('username'),
+      roomName: this.$route.query.roomName,
       socket: '',
       //
       value: '',
-      roomName: '',
       message: [],
       rememberH: ''
     }
   },
   created () {
-    this.socket = io(process.env.VUE_APP_BASE_URL + '?username=' + this.username, {
+    this.socket = io(process.env.VUE_APP_BASE_URL + '?username=' + this.username + '&roomName=' + this.roomName, {
       // forceNew: false,
       // path: '/'
     });
@@ -156,12 +156,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-body{
-  background: rgb(235, 235, 235);
-}
+
 .page{
   background: rgb(235, 235, 235);
   padding-top: 0.2rem;
+  height: 100%;
 }
 .header{
   position: fixed;
@@ -179,6 +178,7 @@ body{
 
 
 .ul{
+  background: rgb(235, 235, 235);
   clear: both;
   overflow: hidden;
   padding-top: 0.8rem;
