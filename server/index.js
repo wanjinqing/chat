@@ -12,7 +12,7 @@ socketio.on('connection', (socket) => {
 
   let username = socket.handshake.query.username;
   let roomName = socket.handshake.query.roomName;
-  console.log(user)
+  console.log('connection: ', user)
 
   Event.joinRoom(socket, roomName);
 

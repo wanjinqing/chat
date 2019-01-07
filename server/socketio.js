@@ -12,7 +12,7 @@ io.use((socket, next) => {
   let roomName = socket.handshake.query.roomName;
   if (username || username.length <= 20) {
     user.add(username, socket.id);
-    user.comeinRoom(roomName, username);
+    user.comeinRoom(socket, roomName, username);
     return next();
   } else if (username && username.length > 20) {
     return next(new Error('username maxlength > 20'));

@@ -25,7 +25,7 @@ User.prototype.createRoom = function (roomName) {
   }
 }
 
-User.prototype.comeinRoom = function (roomName, username) {
+User.prototype.comeinRoom = function (socket, roomName, username) {
   if (this.currentRoom[roomName]) {
     // 已经加入的不能重复
     if (this.currentRoom[roomName].usernames.indexOf(username) > -1) {
@@ -34,12 +34,28 @@ User.prototype.comeinRoom = function (roomName, username) {
     this.currentRoom[roomName].usernames.push(username);
     this.currentRoom[roomName].person++;
   } else {
-    console.log('没有这个房间');
+    console.log('房间不存在', roomName);
+    socket.emit('noExistRoom', {
+      roomName: roomName
+    });
+  }
+}
+
+// 离开房间
+User.prototype.leaveRoom = function (roomName, username) {
+  if (this.currentRoom[roomName]) {
+    let arr = this.currentRoom[roomName].usernames;
+    arr.splice(arr.indexOf(username), 1);
+
+    this.currentRoom[roomName].person--;
+    if (this.currentRoom[roomName].person <= 0) {
+      delete this.currentRoom[roomName];
+    }
   }
 }
 
 User.prototype.getRooms = function () {
-  var arr = []
+  let arr = [];
   Object.keys(this.currentRoom).forEach(key => {
     arr.push({ ...this.currentRoom[key], roomName: key});
   })

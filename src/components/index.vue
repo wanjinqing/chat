@@ -55,9 +55,11 @@ export default {
     });
     this.socket.on('connect', () => {
       this.socket.on('joinRoom', this.joinRoom);
+      this.socket.on('noExistRoom', this.noExistRoom);
       this.socket.on('connect_notice', this.connectNotice);
       this.socket.on('receive', this.receive);
     });
+    console.log(this.socket)
     this.socket.on('disconnect', () => {
       console.log('disconnect')
     });
@@ -99,6 +101,10 @@ export default {
     // socket
     joinRoom (d) {
       this.roomName = d.roomName;
+    },
+    // 不存在这个房间
+    noExistRoom (d) {
+      this.$router.push({path: '/rooms'});
     },
     connectNotice (d) {
       this.message.push({
@@ -152,6 +158,9 @@ export default {
         })
       }
     }
+  },
+  destroyed () {
+    this.socket.close();
   }
 }
 </script>

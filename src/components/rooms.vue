@@ -2,7 +2,7 @@
   <div class="page" v-title="'房间列表'">
     <div class="box">
       <loadmore noDataText="暂无房间" @load="load" :loading="loading" :noData="list.length==0">
-        <div class="item clear" v-for="(item, index) in list" :key="index">
+        <div class="item clear" v-for="(item, index) in list" :key="index" @click="goToIndex(item)">
           <div class="fl left">
             <div>房间名：{{item.roomName}}</div>
             <div>人数：{{item.person}}</div>
@@ -98,6 +98,9 @@ export default {
       } else {
         this.loading = false;
       }
+    },
+    goToIndex (item) {
+      this.$router.push({path: '/', query: {roomName: item.roomName}});
     }
   },
   filters: {
@@ -136,6 +139,7 @@ export default {
   text-align: center;
   background-color: #734;
   width: 100%;
+  max-width: 750px;
   .button{
     height: 0.88rem;
     line-height: 0.88rem;

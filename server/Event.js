@@ -31,6 +31,10 @@ Event.prototype.leaveRoom = function (socket, user) {
   // console.log(socket.adapter.rooms[roomName].sockets);
   // 用户断开连接
   socket.on('disconnect', () => {
+    console.log('disconnect: ', user)
+    var roomName = socket.handshake.query.roomName;
+    var username = socket.handshake.query.username;
+    user.leaveRoom(roomName, username);
     user.remove(socket.id);
   })
 }
